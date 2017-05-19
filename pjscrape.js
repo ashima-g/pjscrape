@@ -872,15 +872,16 @@ var pjs = (function(){
     };
 }());
 
+var system = require('system');
 
 // make sure we have a config file
-if (!phantom.args.length) {
+if (!system.args.length) {
     // die
     console.log('Usage: pjscrape.js <configfile.js> ...');
     phantom.exit();
 } else {
     // load the config file(s)
-    phantom.args.forEach(function(configFile) {
+    system.args.splice(1).forEach(function(configFile) {
         if (configFile.indexOf(".js") !== -1) {
             if (!phantom.injectJs(configFile)) {
                 fail('Config file not found: ' + configFile);
